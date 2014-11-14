@@ -1,0 +1,54 @@
+html, body{
+    height: 100%;
+}
+body{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: sans;
+}
+.box{
+    height: 100%;
+    width: 100%;
+    min-height: 768px;
+    min-width: 1024px;
+    overflow: hidden;
+    position: absolute;
+}
+.left, .right, .up, .down {
+    text-align: center;
+}
+.left, .right {
+    height: 100%;
+    width: 10%;
+    float: left;
+    white-space: nowrap;
+}
+.vertical {
+    height: 100%;
+    width: 80%;
+    float: left;
+}
+.up {
+    height: 97.5%;
+}
+.down {
+    height: 2.5%;
+}
+.left.subbox > div, .right.subbox > div {
+    height: 5%;
+    width: 100%;
+    min-width: 82px;
+    /*margin: 250% 0;
+    transform: rotate(0.25turn);*/
+}
+.left.subbox > div {
+    margin: 250% -50%;
+    transform: rotate(0.25turn);
+    -webkit-transform: rotate(0.25turn);
+}
+.right.subbox > div {
+    margin: 250% 50%;
+    transform: rotate(-0.25turn);
+    -webkit-transform: rotate(-0.25turn);
+}

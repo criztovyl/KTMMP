@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>KT - MMP</title>
+        <link rel="stylesheet" href="css.css" type="text/css"/>
+        <link rel="stylesheet" href="jq-ui/jquery-ui.min.css">
+        <script src="jq-ui/external/jquery/jquery.js"></script>
+        <script src="jq-ui/jquery-ui.min.js"></script>
+        <script src="sprintf.js"></script>
+        <script src="box.js"></script>
+        <script src="neighbourhood.js"></script>
+        <script type="text/javascript" src="js.js"></script>
+    </head>
+    <body>
+        <span id="loading">Loading...</span>
+    <!--    <div class="box" id="box_start">
+            <div class="left" onclick="change('#box_start', '#box1', 'right');">&larr; Box 1 &larr;</div>
+            <div class="right" onclick="change('#box_start', '#box3', 'left');">&rarr; Box 3 &rarr;</div>
+            <div class="top" onclick="change('#box_start', '#box2', 'down');">&uarr; Box 2 &uarr;</div>
+            <div class="bottom" onclick="change('#box_start', '#box4', 'up');">&darr; Box 4 &darr;</div>
+            <div class="content">
+                <div class="left"></div>
+                <div class="content"></div>
+                <div class="right"></div>
+            </div>
+        </div>
+        <div class="box" id="box1" style="display: none;">
+            --><!--            <div class="left" onclick="change('#box1', '#box3', 'right');">&lt;&lt; Box 3 &lt;&lt;</div>--><!--
+            <div class="right" onclick="change('#box1', '#box_start', 'left');">&gt;&gt; Box start &gt;&gt;</div>
+            <div class="top" onclick="change('#box1', '#box2', 'down');">^^ Box 2 ^^</div>
+            <div class="bottom" onclick="change('#box1', '#box4', 'up');">vv Box 4 vv</div>
+            <div class="content">Box 1</div>
+        </div>
+        <div class="box" id="box2" style="display: none;">
+            <div class="left" onclick="change('#box2', '#box1', 'right');">&lt;&lt; Box 1 &lt;&lt;</div>
+            <div class="right" onclick="change('#box2', '#box3', 'left');">&gt;&gt; Box 3 &gt;&gt;</div>
+            <div class="top" onclick="change('#box2', '#box4', 'down');">^^ Box 4 ^^</div>
+            --><!--            <div class="bottom" onclick="change('#box2', '#box_start', 'up');">vv Box start vv</div>--><!--
+            <div class="content">Box 2</div>
+        </div>
+        <div class="box" id="box3" style="display: none;">
+            <div class="left" onclick="change('#box3', '#box_start', 'right');">&lt;&lt; Box start &lt;&lt;</div>
+            >--<!--            <div class="right" onclick="change('#box3', '#box1', 'left');">&gt;&gt; Box 1 &gt;&gt;</div>--><!--
+            <div class="top" onclick="change('#box3', '#box2', 'down');">^^ Box 2 ^^</div>
+            <div class="bottom" onclick="change('#box3', '#box3', 'up');">vv Box 3 vv</div>
+            <div class="content">Box 3</div>
+        </div>
+        <div class="box" id="box4" style="display: none;">
+            <div class="left" onclick="change('#box4', '#box1', 'right');">&lt;&lt; Box 1 &lt;&lt;</div>
+            <div class="right" onclick="change('#box4', '#box3', 'left');">&gt;&gt; Box 3 &gt;&gt;</div>
+            <div class="top" click="change('#box4', '#box_start', 'down');">^^ Box start ^^</div>
+            <div class="bottom" onclick="change('#box4', '#box2', 'up');">vv Box 2 vv</div>
+            --><!--            <div class="content">Box 4</div>--><!--
+        </div>-->
+    </body>
+</html>
+<script type="text/javascript">
+    init();
+</script>
