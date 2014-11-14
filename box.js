@@ -74,8 +74,9 @@ Box.prototype = {
         $(current).toggle('slide', { direction: direction }, 2000);
     }
 }
-function BoxManager(){
+function BoxManager(arrangement){
     this.array = [];
+    this.arrangement = arrangement;
 }
 BoxManager.prototype = {
     add: function(id, box){
@@ -83,5 +84,25 @@ BoxManager.prototype = {
     },
     get: function(id){
         return this.array[id];
+    },
+    neighbour: function(id, direction){
+        
+        var nI = neighbourIndex(direction);
+        
+        var row_ = nI[0] == 0 ? row + nI[1]: row;
+        var col_ = nI[0] == 1 ? col + nI[1]: col;
+        
+        if(col_ >= 0 && col_ < this.arrangement[0].length && row_ >= 0 && row_ < this.arrangement[0].length)
+           return this.arrangement[row_][col_];
+    },
+    neighbourIndexDiff: function(direction){
+         return direction == "right" ? [1, 1] : direction == "left" ? [1, -1] : direction == "up" ? [0, -1] : direction == "down" ? [0, 1] : [-1, 0];
+    },
+    getRowAndIndex: function(id){
+        for(var i = 0; i < this.arrangement.length; i++){
+            var index = this.arrangement[i].indexOf(id);
+            if(index != -1)
+                return [i, index];
+        }
     }
 }
