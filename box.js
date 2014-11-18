@@ -1,11 +1,3 @@
-function _es(str){
-	return (str == undefined ? "" : str);
-}
- 
-function _ses(str, sffx){
-	return (str == undefined ? "" : str + sffx);
-}
-
 function Box(id, name, content) {
     this.id = id;
     this.name = name;
@@ -16,93 +8,103 @@ function reverseDirection(direction) {
     return direction == "right" ? "left" : direction == "left" ? "right" : direction == "up" ? "down" : direction == "down" ? "up" : "";
 }
 
-function change(current, target, direction) {
-    var _direction = reverseDirection(direction);
-    $(current).toggle('slide', { direction: direction }, 2000,
-        function() {
-            $(target).toggle('slide', {direction: _direction }, 2000)
-        });
-}
-
 Box.prototype = {
-    fullid: function() {
-        return "#box" + this.id
-    },
-    navBox: function(from, direction) {
-        return sprintf('<div class="%s subbox"><div onclick="change(\'%s\', \'%s\', \'%s\')">%s</div></div>', direction, from.fullid(), this.fullid(), reverseDirection(direction), this.arrow(direction));
-    },
-    box: function(visible) {
-        //return this.div(sprintf("%s%s%s%s%s", this.neighbour("left"), this.neighbour("right"), this.neighbour("up"), this.neighbour("down"), this.content()), visible);
-        return this.div(sprintf('%s<div class="vertical">%s%s</div>%s', this.neighbour("left"), this.neighbour("up"), this.neighbour("down"), this.neighbour("right")), visible);
-    },
-    div: function(value, visible) {
-        return sprintf('<div class="box" id="box%s" %s>\n%s\n</div>', this.id, visible === true ? '' : 'style="display: none;"' ,value == undefined ? "" : value);
-    },
-    getContent: function() {
-    	//return sprintf('<div class="content">%s</div>', this.name);
-    	return this.content == undefined ? "This is " + this.name : this.content;
-    },
     arrow: function(direction){
-    	return sprintf('%2$s %1$s %2$s', this.name, direction == "right" ? "&darr;" : direction == "left" ? "&darr;" : direction == "up" ? "&uarr;" : direction == "down" ? "&darr;" : "");
+    	return sprintf('%2$s %1$s %2$s', this.neighbours[direction] != undefined ? this.neighbours[direction].name : '', direction == "right" ? "&darr;" : direction == "left" ? "&darr;" : direction == "up" ? "&uarr;" : direction == "down" ? "&darr;" : "");
     },
-    neighbour: function(direction){
-    	var box = this.neighbours[direction];
-    	if(!(box == undefined || box.navBox == undefined)){
-    		return box.navBox(this, direction) + "\n";
-    	}
-    	else{
-    		return sprintf('<div class="%s subbox"></div>', direction);
-    	}
+    box: function(display){
+        return sprintf('<div class="box" id="%1$s"%4$s>%2$s%3$s</div>', this.fullid(), this.navBoxes(), this.contentBox(), display ? '' : ' style="display: none;"');
     },
-    print: function(visible, reference){
-    	$(reference == undefined ? "body" : reference).append(this.box(visible));
+    navBoxes: function(){
+        return sprintf('<div class="left">%s</div><div class="vertical">%s%s</div><div class="right">%s</div>', this.navBox('left'), this.navBox('up'), this.navBox('down'), this.navBox('right'));
     },
-    printContent: function(){
-        if($(content).length == 0)
-            $("body").append('<div class="content"></div>');
-        var content = this.getContent();
-        $('.content').html(content);
+    contentBox: function(){
+        return sprintf('<div class="content">%s</div>', this.content);
+    },
+    navBox: function(direction){
+        return sprintf('<div class="%1$s subbox">%2$s</div>', direction, this.neighbours[direction] != undefined ? '<div onclick="javascript:boxManager.change(this.offsetParent.id, this.parentElement.className.split(\' \')[0]);" >' + this.arrow(direction) + '</div>' : '');
+    },
+    fullid: function(){
+        return "box" + this.id;
+    },
+    print: function(visible, neighbours){
+        $('body').append(this.box(visible, neighbours));
     },
     setNeighbours: function(neighbours){
-    	this.neighbours = neighbours;
-    },
-    switchTo: function(){
-        this.printContent();
-    },
-    slide: function(direction){
-        $(".content").html("");
-        $(current).toggle('slide', { direction: direction }, 2000);
+        this.neighbours = neighbours;
     }
 }
 function BoxManager(arrangement){
-    this.array = [];
+    this.array = {};
     this.arrangement = arrangement;
 }
 BoxManager.prototype = {
-    add: function(id, box){
+    add: function(id, box, start){
+        id = this.formatId(id);
         this.array[id] = box;
+        if(start)
+            this.startID = id;
     },
     get: function(id){
-        return this.array[id];
+        return this.array[this.formatId(id)];
     },
     neighbour: function(id, direction){
+        id = this.formatId(id);
         
-        var nI = neighbourIndex(direction);
-        
-        var row_ = nI[0] == 0 ? row + nI[1]: row;
-        var col_ = nI[0] == 1 ? col + nI[1]: col;
-        
-        if(col_ >= 0 && col_ < this.arrangement[0].length && row_ >= 0 && row_ < this.arrangement[0].length)
-           return this.arrangement[row_][col_];
+        var nI = this.neighbourIndexDiff(direction);
+
+        var rowAndCol = this.getRowAndIndex(id);
+
+        if(rowAndCol != undefined){
+            var row_ = nI[0] == 0 ? rowAndCol[0] + nI[1]: rowAndCol[0];
+            var col_ = nI[0] == 1 ? rowAndCol[1] + nI[1]: rowAndCol[1];
+                
+            if(col_ >= 0 && col_ < this.arrangement[0].length && row_ >= 0 && row_ < this.arrangement[0].length)
+           return this.get(this.arrangement[row_][col_]);
+        }
     },
     neighbourIndexDiff: function(direction){
          return direction == "right" ? [1, 1] : direction == "left" ? [1, -1] : direction == "up" ? [0, -1] : direction == "down" ? [0, 1] : [-1, 0];
     },
     getRowAndIndex: function(id){
+        id = this.formatId(id);
         for(var i = 0; i < this.arrangement.length; i++){
             var index = this.arrangement[i].indexOf(id);
             if(index != -1)
                 return [i, index];
         }
+    },
+    change: function(id, direction){
+        id = this.formatId(id);
+        var current = "#" + id;
+        var target = "#"+  this.neighbour(id.replace("box", ""), direction).fullid();
+        var _direction = reverseDirection(direction);
+        console.log(current + " " + target + " " + direction);
+       
+        $(current).toggle('slide', { direction: _direction }, 2000,
+            function() {
+                $(target).toggle('slide', {direction: direction }, 2000)
+        });
+        
+    },
+    print: function(){
+        var start = this.get(this.startID);
+        $.each(this.array, function(index, value){
+            value.setNeighbours(boxManager.neighbours(index));
+            value.print(value == start ? true : false);
+        })
+    },
+    neighbours: function(id){
+        id = this.formatId(id);
+        var neighbours = {};
+        var directions = ["up", "left", "down", "right"];
+        for(var i = 0; i < directions.length; i++){
+            neighbours[directions[i]] = this.neighbour(id, directions[i]);
+        }
+        return neighbours;
+    },
+    formatId: function(id){
+        id_ = parseInt(id);
+        return isNaN(id_) ? id : id_;
     }
 }
