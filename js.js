@@ -1,6 +1,5 @@
 var boxManager; 
 function init(){
-    $("#loading").remove();
     boxManager = new BoxManager([
             [8, 1, 2],
             [7, "start", 3],
@@ -13,18 +12,11 @@ function init(){
     boxManager.add(4, new Box('4', 'Box 4', "This is Box 4:)"));
     boxManager.add(5, new Box('5', 'Box 5', "This is Box 5:)"));
     boxManager.add(6, new Box('6', 'Box 6', "This is Box 6:)"));
-    boxManager.add(7, new Box('7', 'Box 7', "This is Box 7:)"));
+    boxManager.add(7, new Box('7', 'Technik', "technik.html", true));
     boxManager.add(8, new Box('8', 'Box 8', "This is Box 8:)"));
-    boxManager.add("start", new Box('start', 'Start', "This is the Start Box:)"), true);
+    boxManager.add("start", new Box('start', 'Start', "startbox.html", true), true);
 
     boxManager.print();
-    /*$(function() {
-        $(window).resize(function() {
-            if ($(".box").length > 0)
-                $('.box').height($(window).height() - $('.box').offset().top - ($('.box').outerHeight(true) - $('.box').height()));
-            //if ($('.subbox').length > 0)
-              //  $('').css();
-        });
-        $(window).resize();
-    });*/
+    style();
+    $("#loading").remove();
 }

@@ -1,7 +1,7 @@
-function Box(id, name, content) {
+function Box(id, name, content, load) {
     this.id = id;
     this.name = name;
-    this.content = content;
+    this.content = load ? $.ajax(content, {async: false}).responseText : content;
 }
 
 function reverseDirection(direction) {
@@ -37,13 +37,14 @@ Box.prototype = {
 function BoxManager(arrangement){
     this.array = {};
     this.arrangement = arrangement;
+    this.current = "";
 }
 BoxManager.prototype = {
     add: function(id, box, start){
         id = this.formatId(id);
         this.array[id] = box;
         if(start)
-            this.startID = id;
+            this.start = id;
     },
     get: function(id){
         return this.array[this.formatId(id)];
@@ -83,12 +84,13 @@ BoxManager.prototype = {
        
         $(current).toggle('slide', { direction: _direction }, 2000,
             function() {
-                $(target).toggle('slide', {direction: direction }, 2000)
+                $(target).toggle('slide', {direction: direction }, 2000);
+                boxManager.current = target.replace("#box", "");
+                style();
         });
-        
     },
     print: function(){
-        var start = this.get(this.startID);
+        var start = this.get(this.start);
         $.each(this.array, function(index, value){
             value.setNeighbours(boxManager.neighbours(index));
             value.print(value == start ? true : false);
@@ -106,5 +108,9 @@ BoxManager.prototype = {
     formatId: function(id){
         id_ = parseInt(id);
         return isNaN(id_) ? id : id_;
+    },
+    getCurrent: function(){
+        return this.current == "" ? this.start : this.current
     }
+
 }

@@ -15,8 +15,14 @@ body{
     overflow-x: hidden;
     position: absolute;
 }
-.box > .content {
+.box .content {
+    width: 100%;
+    z-index: -1;
     position: absolute;
+}
+.box .content div {
+  margin: 100px auto 0;
+  width: 50%;
 }
 .left, .right, .up, .down {
     text-align: center;
@@ -36,7 +42,6 @@ body{
     height: 97.5%;
 }
 .down {
-    height: 2.5%;
 }
 .left.subbox, .right.subbox {
     width: 100%
