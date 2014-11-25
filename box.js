@@ -38,6 +38,7 @@ function BoxManager(arrangement){
     this.array = {};
     this.arrangement = arrangement;
     this.current = "";
+    this.last = "";
 }
 BoxManager.prototype = {
     add: function(id, box, start){
@@ -60,8 +61,9 @@ BoxManager.prototype = {
             var row_ = nI[0] == 0 ? rowAndCol[0] + nI[1]: rowAndCol[0];
             var col_ = nI[0] == 1 ? rowAndCol[1] + nI[1]: rowAndCol[1];
                 
-            if(col_ >= 0 && col_ < this.arrangement[0].length && row_ >= 0 && row_ < this.arrangement[0].length)
+            if(col_ >= 0 && col_ < this.arrangement[0].length && row_ >= 0 && row_ < this.arrangement.length){
            return this.get(this.arrangement[row_][col_]);
+            }
         }
     },
     neighbourIndexDiff: function(direction){
@@ -75,17 +77,19 @@ BoxManager.prototype = {
                 return [i, index];
         }
     },
-    change: function(id, direction){
+    change: function(id, direction, direct){
         id = this.formatId(id);
-        var current = "#" + id;
-        var target = "#"+  this.neighbour(id.replace("box", ""), direction).fullid();
+        var current = "#" + (direct != undefined ? "box" + this.getCurrent() : id);
+        var target = "#"+ (direct != undefined ? id : this.neighbour(id.replace("box", ""), direction).fullid());
         var _direction = reverseDirection(direction);
         console.log(current + " " + target + " " + direction);
        
-        $(current).toggle('slide', { direction: _direction }, 2000,
+        $(current).toggle(direct ? 'fade' : 'slide', { direction: _direction }, 2000,
             function() {
-                $(target).toggle('slide', {direction: direction }, 2000);
+                $(target).toggle(direct ? 'fade' : 'slide', {direction: direction }, 2000);
                 boxManager.current = target.replace("#box", "");
+                boxManager.last = current.replace("#box", "");
+                location.hash = "#" + target.replace("#box", "");
                 style();
         });
     },
@@ -111,6 +115,9 @@ BoxManager.prototype = {
     },
     getCurrent: function(){
         return this.current == "" ? this.start : this.current
+    },
+    getLast: function(){
+        return this.last;
     }
 
 }
