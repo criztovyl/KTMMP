@@ -6,6 +6,14 @@
             <li>Verbindungsorientiert: Endpunkte sind ständig direkt miteinander verbunden. </li>
             <li>Paktetorientiert: Datenversand auf Basis von Paketen.
         </ul>
-        <p style="">TCP ist ein zuverlässiges, verbindungs- und paketorientiertes Protokoll zum Datenaustausch. Verbindungsorientiert heißt, dass beiden Endpunkte ständig direkt miteinander verbunden sind und paketorientiert, dass die Daten auf Basis von Paketen versendet werden </p>
+        <p style="">TCP ist ein zuverlässiges, verbindungs- und paketorientiertes Protokoll zum Datenaustausch und ist in der OSI Schicht 4 "Transport" angesiedelt.</p>
+        <h2>Verbindungsaufbau</h2>
+        <p>TCP baut seine Verbindung mit einem Drei-Wege-Handschlag auf (three way handshake):</p>
+        <ol>
+            <li>SYN: Der erste Host, der die Verbindung aufbauen möchte, schickt an den Zielhost ein spezielles Paket, das SYN-Pakte. SYN steht hier für "synchronize".</li>
+            <li>SYN-ACK: Der zweite Host, teilt dem ersten mit diesem Paket mit, dass er die Anfrage erhalten hat. ACK steht hier für "acknowledgement", englisch für "Bestätigung".</li>
+            <li>ACK: Der erste Host bestätigt das wieder und danach ist die Verbindung aufgebaut.</li>
+        </ol>
+        <h2>Header</h2>
     </div>
 </div>

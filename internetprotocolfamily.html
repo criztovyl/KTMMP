@@ -1,15 +1,35 @@
 <div>
     <h1>Die Internetprotokollfamilie</h1>
-    <p>Das Internet besteht aus ganz unterschiedlichen Protokollen, die dann unter diesem Namen zusammengefasst sind. Hier ein paar Beispiele:</p>
-    <p>Aufgrund der enormen Wichtigkeit von TCP und IP, wird mit TCP/IP oft die gesamte Internetprotokollfamile bezeichnet. Dazu gehören aber nicht nur TCP und IP sondern zum Beispiel auch folgende Protokolle:<ul>
+    <p>Das Internet besteht aus ganz unterschiedlichen Protokollen, die dann unter diesem Namen zusammengefasst sind. Hier ein paar Beispiele.<br>
+    <i>Aufgrund der enormen Wichtigkeit von TCP und IP, wird mit TCP/IP oft die gesamte Internetprotokollfamile bezeichnet. Dazu gehören aber nicht nur TCP und IP.</i></p>
+    <ul>
         <li>FTP, das File Transfer Protocol</li>
-        <li>HTTP(S), das Hyper Text Transfer Protocol (Secured) um "Hyper Text" zu transportieren</li>
-        <li>IMAP, das Internet Message Access Protocol um auf eMail-Postfach zuzugreifen</li>
+        <li>IMAP, das Internet Message Access Protocol um auf eMail-Postfächer zuzugreifen</li>
         <li>SMTP, das Simple Message Transfer Protocol um eMails zu senden</li>
-        <li>SSH, das Secures Shell Protokoll, für entfernte Kommandozeile</li>
-        <li>UDP, das User Datagram Protocol, die Verbindungslose Variante von TCP/IP.</li>
-        <li><a href="#tls">TLS</a>, das Transmission Layer Security (ehem. SSL) für verschlüsseltes TCP</li>
-        <li>ICMP, das Internet Control Message Protocol</li>
+        <li>SSH, das Secures Shell Protokoll, für eine gesicherte Verbindung zu entfernte Kommandozeile</li>
+        <li>UDP, das User Datagram Protocol, die verbindungslose Variante von TCP</li>
+        <li><a href="#tls">TLS</a>, das Transmission Layer Security (war früher SSL) für verschlüsseltes TCP</li>
     </ul>
-    </p>
+    <h2>HTTP</h2>
+    <p>HTTP, das "Hypter Text Transfer Protocol" ist das Protokoll, das den "Hyper Text" (Hypertext) über TCP transportiert.
+    Der Hypertext zeichnet sich dadurch aus, dass er mit anderen Hypertexten verbunden ist.
+    Der englische Begriff dafür ist "to reference" oder "to link" und da er im Hypertext zu finden ist, heißt er "Hyper Reference" (href) und "Hyper Link" (Hyperlink), der mittlerweile einfach nur unter dem Namen "Link" firmiert.
+    <br>
+    Mehr dazu findest du rechts :)</p>
+    <h2>TCP</h2>
+    <p>Nachdem TCP nun so oft erwähnt wurde: Schau oben, da findest du alles dazu.<p>
+    <h2>IP</h2>
+    <p>IP ist für die Adressierung der Netzteilnehmer, im Fachjargon auch "Host", zuständig.
+    IP wird zum Beispiel von TCP genutzt.
+    Möglicherweise hast du sogar schon einmal eine IP Adresse gesehen, ein typisches Beispiel für eine IP Adresse ist <code>192.168.X.1</code>, was meistens die Adresse deines Routers ist.
+    Derzeit gibt es zwei Versionen von IP: Version 4 und Version 6. Die Beispiel-IP ist eine IPv4 Adresse, eine IPv6 Adresse sieht z.B. so aus:
+    <pre><code></code>fe80::325:23ff:fef8:fc07</pre><br>
+    Eine genauere Beschreibung findest du rechts :)</p>
+    <h2>TLS</h2>
+    <p>TLS wird dazu verwendet, um Verbindungen zu verschlüsseln.
+    Es findet aber nur ein bestimmter Teil der Kommunikation (zwischen Computern) im Internet verschlüsselt statt.
+    Verschlüsselt sind z.B. Bankseiten oder andere, wichtige Seiten.
+    So ist es zum Beispiel möglich, dein Passwort, dass du auf einer Webseite eingibst, die kein HTTPS unterstützt, abgefischt werden kann.
+    Ein großer Problem der Seitenbetreiber sind aber meist die hohen Zusatzkosten, um HTTPS anzubieten.<br>
+    Genaueres <a href="#tls">hier</a>.</p>
 </div>

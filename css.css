@@ -6,6 +6,7 @@ body{
     padding: 0;
     margin: 0;
     font-family: sans;
+    background: silver;
 }
 .box{
     height: 100%;
@@ -17,14 +18,14 @@ body{
 }
 .box .content {
     width: 100%;
-/*    z-index: -1;
-    position: absolute;*/
-    height: 90%;
+    height: 88%;
     overflow: auto;
+    background: white;
+    border-radius: 10px;
+    padding: 1%;
 }
 .box .content > div {
-  margin: 100px auto;
-  width: 50%;
+  margin: auto;
 }
 .left, .right, .up, .down {
     text-align: center;
@@ -49,6 +50,7 @@ body{
 .subbox > div {
   position: relative;
   z-index: 5;
+  cursor: pointer;
 }
 .left.subbox, .right.subbox {
     width: 100%

@@ -10,22 +10,22 @@ function reverseDirection(direction) {
 
 Box.prototype = {
     arrow: function(direction){
-    	return sprintf('%2$s %1$s %2$s', this.neighbours[direction] != undefined ? this.neighbours[direction].name : '', direction == "right" ? "&darr;" : direction == "left" ? "&darr;" : direction == "up" ? "&uarr;" : direction == "down" ? "&darr;" : "");
+    	return _spf('%2$s %1$s %2$s', this.neighbours[direction] != undefined ? this.neighbours[direction].name : '', direction == "right" ? "&darr;" : direction == "left" ? "&darr;" : direction == "up" ? "&uarr;" : direction == "down" ? "&darr;" : "");
     },
     box: function(display){
-        return sprintf('<div class="box" id="%1$s"%3$s>%2$s</div>', this.fullid(), this.navBoxes(this.contentBox()), display ? '' : ' style="display: none;"');
+        return _spf('<div class="box" id="%1$s"%3$s>%2$s</div>', this.fullid(), this.navBoxes(this.contentBox()), display ? '' : ' style="display: none;"');
     },
     navBoxes: function(content){
-        return sprintf('<div class="left">%s</div><div class="vertical">%s%s%s</div><div class="right">%s</div>', this.navBox('left'), this.navBox('up'), content, this.navBox('down'), this.navBox('right'));
+        return _spf('<div class="left">%s</div><div class="vertical">%s%s%s</div><div class="right">%s</div>', this.navBox('left'), this.navBox('up'), content, this.navBox('down'), this.navBox('right'));
     },
     contentBox: function(){
-        return sprintf('<div class="content">%s</div>', this.content);
+        return _spf('<div class="content">%s</div>', this.content);
     },
     navBox: function(direction){
-        return sprintf('<div class="%1$s subbox">%2$s</div>', direction, this.neighbours[direction] != undefined ? '<div onclick="javascript:boxManager.change(this.offsetParent.id, this.parentElement.className.split(\' \')[0]);" >' + this.arrow(direction) + '</div>' : '');
+        return _spf('<div class="%1$s subbox">%2$s</div>', direction, this.neighbours[direction] != undefined ? '<div onclick="javascript:boxManager.change(this.offsetParent.id, this.parentElement.className.split(\' \')[0]);" >' + this.arrow(direction) + '</div>' : '');
     },
     fullid: function(){
-        return "box" + this.id;
+        return this.id;
     },
     print: function(visible, neighbours){
         $('body').append(this.box(visible, neighbours));
@@ -79,19 +79,34 @@ BoxManager.prototype = {
     },
     change: function(id, direction, direct){
         id = this.formatId(id);
-        var current = "#" + (direct != undefined ? "box" + this.getCurrent() : id);
-        var target = "#"+ (direct != undefined ? id : this.neighbour(id.replace("box", ""), direction).fullid());
+        //Current box and current box id
+        var cb = (direct != undefined ? this.getCurrent() : id);
+        var cbID = ".box#" + cb;
+
+        //Target box and target box id
+        var tb = (direct != undefined ? id : this.neighbour(id, direction).fullid()); 
+        var tbID  = ".box#" + tb;
+
+        //Reverse direction
         var _direction = reverseDirection(direction);
-        console.log(current + " " + target + " " + direction);
+
+        //Special direct action and duration
+        var action = direct ? 'fade' : 'slide';
+        var duration = direct ? 500 : 2000;
+
+        console.log(_spf("Changing from %s to %s (direction %s) by %s in %s ms", cb, tb, direction, action, duration));
        
-        $(current).toggle(direct ? 'fade' : 'slide', { direction: _direction }, 2000,
+        $(cbID).toggle(action, { direction: _direction }, duration,
             function() {
-                $(target).toggle(direct ? 'fade' : 'slide', {direction: direction }, 2000);
-                boxManager.current = target.replace("#box", "");
-                boxManager.last = current.replace("#box", "");
-                location.hash = "#" + target.replace("#box", "");
+                $(tbID).toggle(action, {direction: direction }, 2000, function(){
+
+                boxManager.current = tb;
+                boxManager.last = cb;
+                
+                location.hash = "#" + tb;
+                
                 style();
-        });
+        })});
     },
     print: function(){
         var start = this.get(this.start);

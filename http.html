@@ -1,0 +1,36 @@
+<div>
+    <h1>HTTP</h1>
+    <p>HTTP, das "Hyper Text Transfer Protocol", wird genutzt, um Hypertext zwischen Computern zu übertragen.
+    HTTP ist ein Protokoll, dass vollständig auf reinen Text ("plain text") setzt.
+    Am bekanntesten aus diesem Protokoll ist ein Fehler: <code>HTTP/1.1 404 Not Found</code>.
+    Die typische Strukur einer HTTP-Anfrage sieht so aus: <code>GET / HTTP/1.1</code>.</p>
+    <h2>HTTP-Request <br><i>HTTP Anfragen </i></h2>
+    <ul>
+        <li><code>GET</code>: Fordert eine Ressource an.
+        Es können Wertepaare übergeben werden, in dem sie als <code>Argument=Wert</code>, mehrere mit <code>&amp;</code> getrennt, mit vorrangehendem <code>?</code> an die URI gehängt werden.
+        Bsp.: <code>GET /index.php?seite=start&amp;user=trulla HTTP/1.1</code></li>
+        <li><code>HEAD</code>: Fordert die Kopfdaten einer Ressource an</li>
+        <li><code>POST</code>: Schickt Daten zur weiteren Verarbeitung an den Server.
+        Argumente werden an den Server übergeben, in dem sie wieder als Argument-Wert-Paare übergeben werden, wobei mehrere wieder mit einem <code>&amp;</code> getrennt werden.
+        Diesmal werden sie aber nicht an die URI anghangen sonder werden im Header mit übergeben (siehe auch unten).</li>
+        <li><code>PUT</code>: Dient dazu, eine Ressource auf die Angegebene URI hochzuladen (meist nicht mehr verwendet)</li>
+        <li><code>DELETE</code>: löscht eine Ressource (meist nicht mehr verwendet)</li>
+        <li><code>TRACE</code>: liefert genau die Anfrage zurück, die abgeschickt wurde</li>
+        <li><code>OPTIONS</code>: eine Liste von Fähigkeiten des Servers</li>
+        <li><code>CONNECT</code>: für Proxyserver mit SSL(TLS)-Tunneln</li>
+    </ul>
+    <h2>HTTP Header</h2>
+    Der HTTP-Header besteht aus mehreren Zeilen, die jeweils ein Wertepaar enthalten.
+    Hier wird bei <code>GET</code> zum Beispiel der Ziel-Host angegeben.
+    Bei <code>POST</code> werden hier auch noch die Argumente übergeben, wobei deren Typ und deren Länge angegeben werden muss.<br>
+    Bsp:<br>
+    <pre><code>
+GET /index.php HTTP/1.1
+Host: example.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 43
+page=start&amp;user=trulla&amp;action=play
+    </code></pre>
+    <h1>HTML</h1>
+    <p>HTML steht für "Hyper Text Markup Language" und ist eine Sprache, aus der sich Hypertext zusammensetzt. Wenn du zum Beispiel in den Code dieser Seite schaust, siehst du (u.a.) HTML. Mehr erfährst du oben :)</p>
+</div>
