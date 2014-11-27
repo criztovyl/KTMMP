@@ -6,7 +6,7 @@ function style(){
     $(current + " ." + obj + " .subbox div").css("margin-top", height/2 /*- $(current + " ." + obj + " .subbox div").width()/2*/);
     });
     console.log(height, $(current + ' .vertical .down.subbox div').height());
-    $(current + " .vertical .up.subbox").css("height", height - $(current + " .vertical .down.subbox div").height());
+    $(current + " .vertical .up.subbox").css("height", height - $(current + " .vertical .down.subbox div").height() - $(current + " .vertical .content").height());
 }
 $(function() {
     $(window).resize(function() {

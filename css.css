@@ -12,16 +12,18 @@ body{
     width: 100%;
     min-height: 518px;
     min-width: 1024px;
-    overflow-x: hidden;
+    overflow: hidden;
     position: absolute;
 }
 .box .content {
     width: 100%;
-/*    z-index: -1;*/
-    position: absolute;
+/*    z-index: -1;
+    position: absolute;*/
+    height: 90%;
+    overflow: auto;
 }
 .box .content > div {
-  margin: 100px auto 0;
+  margin: 100px auto;
   width: 50%;
 }
 .left, .right, .up, .down {
@@ -39,9 +41,10 @@ body{
     float: left;
 }
 .up {
-    height: 97.5%;
+    height: 5%;
 }
 .down {
+    height: 5%;
 }
 .subbox > div {
   position: relative;

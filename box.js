@@ -13,10 +13,10 @@ Box.prototype = {
     	return sprintf('%2$s %1$s %2$s', this.neighbours[direction] != undefined ? this.neighbours[direction].name : '', direction == "right" ? "&darr;" : direction == "left" ? "&darr;" : direction == "up" ? "&uarr;" : direction == "down" ? "&darr;" : "");
     },
     box: function(display){
-        return sprintf('<div class="box" id="%1$s"%4$s>%2$s%3$s</div>', this.fullid(), this.navBoxes(), this.contentBox(), display ? '' : ' style="display: none;"');
+        return sprintf('<div class="box" id="%1$s"%3$s>%2$s</div>', this.fullid(), this.navBoxes(this.contentBox()), display ? '' : ' style="display: none;"');
     },
-    navBoxes: function(){
-        return sprintf('<div class="left">%s</div><div class="vertical">%s%s</div><div class="right">%s</div>', this.navBox('left'), this.navBox('up'), this.navBox('down'), this.navBox('right'));
+    navBoxes: function(content){
+        return sprintf('<div class="left">%s</div><div class="vertical">%s%s%s</div><div class="right">%s</div>', this.navBox('left'), this.navBox('up'), content, this.navBox('down'), this.navBox('right'));
     },
     contentBox: function(){
         return sprintf('<div class="content">%s</div>', this.content);
