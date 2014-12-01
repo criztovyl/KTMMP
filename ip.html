@@ -1,0 +1,34 @@
+<div>
+    <ul class="info">
+        <li>Host: Netzteilnehmer</li>
+        <li>Routing: Wegfindung</li>
+        <li>Hop: Eine Verarbeitung durch einen Router</li>
+    </ul>
+    <h1>IP<br>Internet Protocol</h1>
+    <p>Das Internet Protokoll ist für die Addressierung der einzelnen Hosts verantwortlich und gewährleistet das Routing.
+    Derzeit gibt es zwei Versionen von IP, IPv4 und IPv6.
+    Der größte Unterschied zwischen beiden ist, dass sie eine andere Anzahl an möglichen Adressen haben: IPv4 hat nur 2<sup>32</sup> (4,3*10<sup>9</sup>) Adressen, IPv6 schon 2<sup>128</sup> (3,4*10<sup>38</sup>).</p>
+    <h2>IPv6</h2>
+    <h3>Darstellung</h3>
+    IPv6 wird hexadezimal in 8 4er Gruppen, getrennt durch <code>:</code>, dargestellt.
+    Hierbei könne vorangehende Nullen weggelassen werden und Gruppen die "0" sind, ein Mal zu "::" zusammengefasst werden.
+    Bsp.: <code>2a03:4000:1::2e26:eee7:1</code>
+    <h3>Header</h3>
+    <div class="image-left">
+        <img src="http://netzmafia.de/skripten/netze/ipv6mainheader.gif">
+        <p class="caption">from <a href="http://netzmafia.de/skripten/netze/netz8.html">netzmafia.de</a></p>
+    </div>
+    Der IPv6 Header hat nur sieben statt bisher 13 Felder.
+    <ul>
+        <li>Version: Die Version, bei IPv6 entsprechend 6, bei IPv4 4. So können v6 und v4 nebeneinander verwendet werden.</li>
+        <li>Priority: Die Priorität des Pakets, bei 0 nicht definiert, bei 1-7 nicht Echtzeit und 8-15 Echtzeit. Je höher die Priorität, desto mehr wird das Paket bevorzugt behandelt.</li>
+        <li>Flow Label: Alle Pakete mit dem gleichen Flow-Label nehmen den gleichen Weg.</li>
+        <li>Paylaoad Length: Nutzlastlänge, die dem Basisheader folgt.</li>
+        <li>Next Header: Der Erweiterungsheader, der dem Basisheader folgt.</li>
+        <li>Hop Limit: Dieses Feld wird nach jedem "Hop" um eins vermindert. Wenn es 0 ist, wird das Paket verworfen.</li>
+    </ul>
+    Bei IPv6 gibt es bisher sechs Erweiterungsheader, die nicht von jedem Router behandelt werden müssen, außer dem Hop-by-Hop Options Header.
+    <h1>Quelle</h1>
+    <a href="http://netzmafia.de/skripten/netze/netz8.html">netzmafia.de</a>
+    <p class="last">Hier links kommst du wieder zurück zur Internetprotokollfamilie.</p>
+</div>
